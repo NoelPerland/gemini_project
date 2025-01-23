@@ -1,5 +1,23 @@
 import ButtonComponent from "@/components/ButtonComponent";
+import { useState } from "react";
+
+// import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// const apiKey = process.env.NEXT_PUBLIC_API_KEY
+
+// const genAI = new GoogleGenerativeAI(apiKey);
+// const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
 export default function Hampus() {
+  // const [category, setCategory] = useState("");
+  const [promt, setPromt] = useState("");
+
+  function applyPromt(title) {
+    setPromt(
+      `Give me three meals within the category ${title}. Describe each one with one sentence underneath the mealtitle`
+    );
+  }
+
   return (
     <div className="flex flex-col my-36 gap-16 items-center justify-center">
       <div className="flex flex-col gap-6">
@@ -13,7 +31,7 @@ export default function Hampus() {
 
       <div className="flex flex-col  bg-gray-700 p-10 rounded-lg gap-6 w-2/4 flex-wrap">
         <div className="flex justify-between">
-          <ButtonComponent title="Comfort Food" />
+          <ButtonComponent title="Comfort Food" func={applyPromt} />
           <ButtonComponent title="Healthy Options" />
           <ButtonComponent title="Sweet Treats" />
           <ButtonComponent title="Savory Snacks" />

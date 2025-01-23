@@ -1,6 +1,10 @@
-export default function ButtonComponent({ title }) {
+export default function ButtonComponent({ title, func }) {
   return (
-    <button className="btn bg-white text-lg text-gray-900  hover:text-white">
+    <button
+      onClick={func}
+      value={title}
+      className="btn bg-white text-lg text-gray-900  hover:text-white"
+    >
       {title}
     </button>
   );
