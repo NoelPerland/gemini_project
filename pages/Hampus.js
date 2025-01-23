@@ -1,15 +1,27 @@
 import ButtonComponent from "@/components/ButtonComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { model } from "@/util/ai";
 
 export default function Hampus() {
   // const [category, setCategory] = useState("");
   const [promt, setPromt] = useState("");
+  const [answer, setAnswer] = useState("");
 
   function applyPromt(title) {
     setPromt(
-      `Give me three meals within the category ${title}. Describe each one with one sentence underneath the mealtitle`
+      `Give me three meals within the category ${title}. Describe each one with one sentence underneath the meal title`
     );
   }
+
+  async function sendPromt() {
+    const result = await model.generateContent(promt);
+
+    setAnswer(result.response.text());
+  }
+
+  useEffect(() => {
+    sendPromt;
+  }, [promt]);
 
   return (
     <div className="flex flex-col my-36 gap-16 items-center justify-center">
@@ -25,29 +37,29 @@ export default function Hampus() {
       <div className="flex flex-col  bg-gray-700 p-10 rounded-lg gap-6 w-2/4 flex-wrap">
         <div className="flex justify-between">
           <ButtonComponent title="Comfort Food" func={applyPromt} />
-          <ButtonComponent title="Healthy Options" />
-          <ButtonComponent title="Sweet Treats" />
-          <ButtonComponent title="Savory Snacks" />
+          <ButtonComponent title="Healthy Options" func={applyPromt} />
+          <ButtonComponent title="Sweet Treats" func={applyPromt} />
+          <ButtonComponent title="Savory Snacks" func={applyPromt} />
         </div>
         <div className="flex justify-between">
-          <ButtonComponent title="Fast Food" />
-          <ButtonComponent title="International Cuisines" />
-          <ButtonComponent title="Vegetarian/Vegan" />
-          <ButtonComponent title="Breakfast" />
+          <ButtonComponent title="Fast Food" func={applyPromt} />
+          <ButtonComponent title="International Cuisines" func={applyPromt} />
+          <ButtonComponent title="Vegetarian/Vegan" func={applyPromt} />
+          <ButtonComponent title="Breakfast" func={applyPromt} />
         </div>
         <div className="flex justify-between">
-          <ButtonComponent title="Seafood" />
-          <ButtonComponent title="Light Bites" />
-          <ButtonComponent title="Cheat Meals" />
-          <ButtonComponent title="Late-Night Cravings" />
+          <ButtonComponent title="Seafood" func={applyPromt} />
+          <ButtonComponent title="Light Bites" func={applyPromt} />
+          <ButtonComponent title="Cheat Meals" func={applyPromt} />
+          <ButtonComponent title="Late-Night Cravings" func={applyPromt} />
         </div>
         <div className="flex justify-between">
-          <ButtonComponent title="Spicy Foods" />
-          <ButtonComponent title="Grilled & BBQ" />
-          <ButtonComponent title="Drinks & Smoothies" />
-          <ButtonComponent title="Fine Dining" />
+          <ButtonComponent title="Spicy Foods" func={applyPromt} />
+          <ButtonComponent title="Grilled & BBQ" func={applyPromt} />
+          <ButtonComponent title="Drinks & Smoothies" func={applyPromt} />
+          <ButtonComponent title="Fine Dining" func={applyPromt} />
         </div>
-        <p>{promt}</p>
+        <p>{answer}</p>
       </div>
     </div>
   );
