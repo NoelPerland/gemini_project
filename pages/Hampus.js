@@ -3,28 +3,36 @@ import { useEffect, useState } from "react";
 import { model } from "@/util/ai";
 
 export default function Hampus() {
-  // const [category, setCategory] = useState("");
+  const [searchCategory, setSearchCategory] = useState("");
   const [promt, setPromt] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState([]);
 
   function applyPromt(title) {
     setPromt(
-      `Give me three meals within the category ${title}. Describe each one with one sentence underneath the meal title`
+      `Provide a valid json output without backticks (very important) at the start and end with the following data - name, desciptsion, time, ingredients, steps. Give me one meal within the category ${title}. Measurment should be in l,dl,ml, teaspoon and spoon. No more data can be provided`
     );
   }
 
   async function sendPromt() {
     const result = await model.generateContent(promt);
-
-    setAnswer(result.response.text());
+    const data = JSON.parse(result.response.text());
+    setAnswer(data);
+    console.log(data);
   }
 
-  useEffect(() => {
-    sendPromt;
-  }, [promt]);
+  function addCategory(e) {
+    setSearchCategory(e.target.value);
+  }
+
+  function checkAndPrintCategory() {
+    setPromt(
+      `Provide a valid json output without backticks (very important) at the start and end with the following data - name, desciptsion, time, ingredients, steps. Give me one meal within the category ${searchCategory}. Measurment should be in l,dl,ml, teaspoon and spoon. No more data can be provided.`
+    );
+    sendPromt();
+  }
 
   return (
-    <div className="flex flex-col my-36 gap-16 items-center justify-center">
+    <div className="flex flex-col py-36 gap-16 items-center justify-center">
       <div className="flex flex-col gap-6">
         <h1 className="text-6xl font-semibold text-start">
           Food recommendations
@@ -59,7 +67,37 @@ export default function Hampus() {
           <ButtonComponent title="Drinks & Smoothies" func={applyPromt} />
           <ButtonComponent title="Fine Dining" func={applyPromt} />
         </div>
-        <p>{answer}</p>
+
+        <hr />
+
+        <div className="flex justify-between">
+          <button
+            onClick={sendPromt}
+            className="btn bg-white text-lg text-gray-900 border-none hover:text-white"
+          >
+            Get Inspo!
+          </button>
+          <div className="flex gap-4">
+            <input
+              onChange={addCategory}
+              type="text"
+              className="bg-white px-4 rounded-lg text-gray-900"
+              placeholder="Other Categories"
+            ></input>
+            <button onClick={checkAndPrintCategory} className="btn text-white">
+              Search
+            </button>
+          </div>
+        </div>
+        <hr />
+        <div className="flex flex-col bg-white text-gray-900 ">
+          <div className="flex justify-between p-5 items-center">
+            <h2 className="text-4xl font-bold">{answer.name}</h2>
+            <p>{answer.time}</p>
+          </div>
+          <p className="text-xl font-semibold p-5">{answer.description}</p>
+          <ol></ol>
+        </div>
       </div>
     </div>
   );
