@@ -54,6 +54,7 @@ export default function Hampus() {
           <ButtonComponent title="Drinks & Smoothies" />
           <ButtonComponent title="Fine Dining" />
         </div>
+        <p>{promt}</p>
       </div>
     </div>
   );
