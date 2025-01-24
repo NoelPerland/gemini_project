@@ -43,15 +43,44 @@ export default function Home() {
                   Discover AI-powered recipes tailored to your taste! Unlock
                   endless culinary inspiration with just a click
                 </p>
+                <br />
               </a>
             </div>
-            <div className="bg-white p-6 shadow rounded-lg">
-              <h3 className="text-xl font-bold mb-2 text-slate-700">
-                Reseguide
-              </h3>
-              <p className="text-gray-600">
-                Brief description of Feature Three.
-              </p>
+
+            <div>
+              <a
+                href="/Irene"
+                className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
+              >
+                <h3 className="text-xl font-bold mb-2 text-slate-700">
+                  Travel Guide
+                </h3>
+                <p className="text-gray-600">
+                  Discover smarter travel with our AI guide—personalized trips
+                  and real-time tips for unforgettable adventures!
+                </p>
+                <br />
+              </a>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 mt-10">
+            <div>
+              <a
+                href="/Karro"
+                className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
+              >
+                <h3 className="text-xl font-bold mb-2 text-slate-700">Karro</h3>
+                <p className="text-gray-600">Brief descripton</p>
+              </a>
+            </div>
+            <div>
+              <a
+                href="/Helin"
+                className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
+              >
+                <h3 className="text-xl font-bold mb-2 text-slate-700">Helin</h3>
+                <p className="text-gray-600">Brief descripton</p>
+              </a>
             </div>
           </div>
         </div>
