@@ -8,7 +8,7 @@ export default function Irene() {
 
   function sendPrompt(city, category) {
     setPrompt(
-      `Provide a valid JSON output without backticks, extra tokens, or marks at the start or end. Generate exactly one object, with one key-value pair. The key must describe the object's position (e.g., 'first', 'second') as a string. The value should be an object containing a recommendation for a cultural place in ${city} under the category "${category}". Include the following fields: 
+      `Provide a valid JSON output without backticks, extra tokens, or marks at the start or end. Generate exactly one object, with one key-value pair. The key must describe the object's position  as a string. The value should be an object containing a recommendation for a cultural place in ${city} under the category "${category}". Include the following fields: 
 - "description": A brief description of the place.
 - "mainInterest": The primary attraction or theme of the place.
 - "price": Entry fee (if any).
@@ -53,10 +53,10 @@ export default function Irene() {
           onChange={(e) => setCity(e.target.value)}
         >
           <option value="">Select a city</option>
-          <option value="Stockholm">Stockholm</option>
-          <option value="Göteborg">Göteborg</option>
-          <option value="Malmö">Malmö</option>
-          <option value="Lund">Lund</option>
+          <option value="Stockholm">Stockholm </option>
+          <option value="Göteborg">Göteborg </option>
+          <option value="Malmö">Malmö </option>
+          <option value="Lund">Lund </option>
         </select>
 
         {city && (
