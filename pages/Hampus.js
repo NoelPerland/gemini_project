@@ -100,7 +100,7 @@ export default function Hampus() {
               </div>
             </div>
             <div>
-              <p className="text-xl font-semibold p-5">{answer.description}</p>
+              <p className="text-xl p-5">{answer.description}</p>
               <h2 className="flex flex-col p-5 text-gray-900 text-xl font-semibold">
                 ingredients:
               </h2>

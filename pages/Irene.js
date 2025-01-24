@@ -5,13 +5,14 @@ export default function Irene() {
   const [answer, setAnswer] = useState(""); /*  */
   const [city, setCity] = useState("Stockholm");
   const [prompt, setPrompt] = useState("");
-  function sendPrompt(category) {
+
+  function sendPrompt(city, category) {
     setPrompt(
-      `Recomend me cultural places for ${city} in the category: ${category}. Provide a description of each place, and include the following data for each: what is the main interest of the place, price for entrance, and timetable `
+      `Provide a valid json output without backticks nor other marks or tokens at the start and end (very important). The json should include an object(without a name and no other nested objects/arrays) with recommendations for cultural places in ${city} under the category "${category}". For each place, provide: - A brief description. - The main interest of the place. - Price for entrance. - Timetable. `
     );
   }
 
-  async function sendPrompt() {
+  async function generateAnswer() {
     const result = await model.generateContent(prompt);
     const data = JSON.parse(result.response.text());
     setAnswer(data);
@@ -64,7 +65,7 @@ export default function Irene() {
             {answer.first}
           </pre>
         )}
-        <button onClick={sendPrompt} className="text-black">
+        <button onClick={generateAnswer} className="text-black">
           generate
         </button>
       </div>
