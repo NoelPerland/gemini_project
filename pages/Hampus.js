@@ -32,7 +32,7 @@ export default function Hampus() {
   }
 
   return (
-    <div className="flex flex-col py-36 gap-16 items-center justify-center">
+    <div className="flex flex-col py-20 gap-16 items-center justify-center">
       <div className="flex flex-col gap-6">
         <h1 className="text-6xl font-semibold text-start">
           Food recommendations
@@ -42,7 +42,7 @@ export default function Hampus() {
         </p>
       </div>
 
-      <div className="flex flex-col  bg-purple-400 p-10 rounded-lg gap-6 w-2/4 flex-wrap  shadow-lg shadow-purple-900">
+      <div className="flex flex-col  bg-purple-500 p-10 rounded-lg gap-6 w-2/4 flex-wrap  shadow-lg shadow-purple-900">
         <div className="flex justify-between">
           <ButtonComponent title="Comfort Food" func={applyPromt} />
           <ButtonComponent title="Healthy Options" func={applyPromt} />
@@ -73,7 +73,7 @@ export default function Hampus() {
         <div className="flex justify-between">
           <button
             onClick={sendPromt}
-            className="btn bg-white text-lg text-gray-900 border-none hover:text-white"
+            className="btn bg-white text-lg text-gray-900 border-none shadow-md shadow-gray-500 hover:text-white"
           >
             Get Inspo!
           </button>
@@ -81,10 +81,13 @@ export default function Hampus() {
             <input
               onChange={addCategory}
               type="text"
-              className="bg-white px-4 rounded-lg text-gray-900"
+              className="bg-white px-4 rounded-lg text-gray-shadow-md shadow-gray-500"
               placeholder="Other Categories"
             ></input>
-            <button onClick={checkAndPrintCategory} className="btn text-white">
+            <button
+              onClick={checkAndPrintCategory}
+              className="btn text-white shadow-md shadow-gray-500"
+            >
               Search
             </button>
           </div>
@@ -100,7 +103,7 @@ export default function Hampus() {
               </div>
             </div>
             <div>
-              <p className="text-xl p-5">{answer.description}</p>
+              <p className="text-xl p-5 bg-gray-100">{answer.description}</p>
               <h2 className="flex flex-col p-5 text-gray-900 text-xl font-semibold">
                 ingredients:
               </h2>
@@ -124,7 +127,11 @@ export default function Hampus() {
               {(() => {
                 const items = [];
                 for (let i = 0; i < answer.steps.length; i++) {
-                  items.push(<li key={i}>{answer.steps[i]}</li>);
+                  items.push(
+                    <li key={i}>
+                      {i + 1} - {answer.steps[i]}
+                    </li>
+                  );
                 }
                 return items;
               })()}
