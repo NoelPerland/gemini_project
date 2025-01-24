@@ -32,17 +32,19 @@ export default function Hampus() {
   }
 
   return (
-    <div className="flex flex-col py-20 gap-16 items-center justify-center bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 ">
-      <div className="flex flex-col gap-6">
-        <h1 className="text-6xl font-semibold text-start">
-          Food recommendations
-        </h1>
-        <p className="text-start text-2xl text-gray-300">
-          What are you craving for?
-        </p>
-      </div>
-
+    <div className="flex flex-col py-14 gap-16 items-center justify-center bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 ">
       <div className="flex flex-col bg-gradient-to-b from-purple-400 via-purple-500 to-purple-800  p-10 rounded-lg gap-6 w-2/4 flex-wrap  shadow-lg shadow-gray-900">
+        <div className="flex flex-col gap-6">
+          <h1 className="text-6xl font-semibold text-center text-gray-900">
+            Food Recommendations
+          </h1>
+          <p className="text-center text-2xl text-gray-800">
+            What are you craving for?
+          </p>
+        </div>
+
+        <hr />
+
         <div className="flex justify-between">
           <ButtonComponent title="Comfort Food" func={applyPromt} />
           <ButtonComponent title="Healthy Options" func={applyPromt} />
@@ -71,12 +73,6 @@ export default function Hampus() {
         <hr />
 
         <div className="flex justify-between">
-          <button
-            onClick={sendPromt}
-            className="btn bg-white text-lg text-gray-900 border-none shadow-md shadow-gray-500 hover:text-white"
-          >
-            Get Inspo!
-          </button>
           <div className="flex gap-4">
             <input
               onChange={addCategory}
@@ -86,11 +82,17 @@ export default function Hampus() {
             ></input>
             <button
               onClick={checkAndPrintCategory}
-              className="btn text-white shadow-md shadow-gray-500"
+              className="btn-lg rounded-xl bg-gray-800 text-lg text-white border-none shadow-md shadow-gray-900 hover:bg-gray-900"
             >
               Search
             </button>
           </div>
+          <button
+            onClick={sendPromt}
+            className="btn-lg rounded-xl bg-gray-800 text-lg text-white border-none shadow-md shadow-gray-900 hover:bg-gray-900"
+          >
+            Generate
+          </button>
         </div>
         <hr />
         {answer.name && (
