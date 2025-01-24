@@ -77,7 +77,7 @@ export default function Hampus() {
             <input
               onChange={addCategory}
               type="text"
-              className="bg-white px-4 rounded-lg text-gray-shadow-md shadow-gray-500"
+              className="bg-white px-4 rounded-lg text-gray-900 shadow-md shadow-gray-500"
               placeholder="Other Categories"
             ></input>
             <button
