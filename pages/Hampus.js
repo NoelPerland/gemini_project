@@ -11,12 +11,6 @@ export default function Hampus() {
     setPromt(
       `Provide a valid json output without backticks at the start and end (very important). Provide the following data - name, desciptsion, time, ingredients(array), steps(array) and portions (No other external objects,arrays or keys can be provided!) Give me one meal within the category ${title}. Measurment should be in l,dl,ml, teaspoon and tablespoon.`
     );
-    async function sendPromt() {
-      const result = await model.generateContent(promt);
-      const data = JSON.parse(result.response.text());
-      setAnswer(data);
-      console.log(data);
-    }
   }
 
   async function sendPromt() {
