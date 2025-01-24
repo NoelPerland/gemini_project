@@ -43,55 +43,59 @@ export default function Irene() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 m-10">
-      <div className="bg-white shadow-md rounded-lg p-8 w-[600px] h-[400px] m-20">
-        <h2 className="text-2xl text-slate-600 font-bold text-center mb-6">
-          Best Cultural Tips
-        </h2>
-        <select
-          className="w-full border border-gray-300 rounded-lg p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onChange={(e) => setCity(e.target.value)}
-        >
-          <option value="">Select a city</option>
-          <option value="Stockholm">Stockholm </option>
-          <option value="Göteborg">Göteborg </option>
-          <option value="Malmö">Malmö </option>
-          <option value="Lund">Lund </option>
-        </select>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-gray-700 via-gray-700 to-gray-950">
+      <div className="bg-gradient-to-b from-purple-500 via-purple-700 to-purple-900  text-white flex flex-col items-center mx-40 rounded-lg">
+        <div className="bg-purple-400 shadow-md rounded-lg p-8 w-[600px] h-[400px] m-20">
+          <h2 className="text-3xl text-whi font-bold text-center mb-6">
+            Best Cultural Tips
+          </h2>
+          <select
+            className="text-slate-800 w-full border border-gray-800 rounded-lg p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-slate-400 mr-2 bg-purple-300"
+            onChange={(e) => setCity(e.target.value)}
+          >
+            <option value="">Select a city</option>
+            <option value="Stockholm">Stockholm </option>
+            <option value="Göteborg">Göteborg </option>
+            <option value="Malmö">Malmö </option>
+            <option value="Lund">Lund </option>
+          </select>
 
-        {city && (
-          <div className="flex flex-col space-y-4">
+          {city && (
+            <div className="flex flex-col space-y-4 justify-center">
+              <button
+                className="bg-slate-900 text-white px-4 py-2 rounded-xl shadow hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300 cursor-pointer"
+                onClick={() => sendPrompt(city, "Daytime")}
+              >
+                Daytime Events
+              </button>
+              <button
+                className="bg-slate-900 text-white px-4 py-2 rounded-xl shadow hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300 cursor-pointer"
+                onClick={() => sendPrompt(city, "Nightime")}
+              >
+                Nightime Events
+              </button>
+              <button
+                className="bg-slate-200 text-slate-800 px-4 py-2 rounded-xl shadow hover:bg-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-600 cursor-pointer"
+                onClick={() => sendPrompt(city, "Kids")}
+              >
+                Kids Activities
+              </button>
+            </div>
+          )}
+
+          {answer.length > 0 && (
+            <pre className="bg-gray-100 p-4 mt-6 text-black border border-gray-300 rounded-lg overflow-auto">
+              {answer}
+            </pre>
+          )}
+          <div className="flex items-center justify-center">
             <button
-              className="bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
-              onClick={() => sendPrompt(city, "Daytime")}
+              onClick={generateAnswer}
+              className="btn-lg rounded-xl bg-white text-lg text-gray-900 hover:text-white hover:bg-gray-900 border-none shadow-md shadow-gray-500 w-1/5 mt-4 flex items-center justify-center"
             >
-              Daytime Events
-            </button>
-            <button
-              className="bg-slate-600 text-white px-4 py-2 rounded-lg shadow hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-300 cursor-pointer"
-              onClick={() => sendPrompt(city, "Nightime")}
-            >
-              Nightime Events
-            </button>
-            <button
-              className="bg-white text-slate-800 px-4 py-2 rounded-lg shadow hover:bg-slate-300 focus:outline-none focus:ring-1 focus:ring-slate-600 cursor-pointer"
-              onClick={() => sendPrompt(city, "Kids")}
-            >
-              Kids Activities
+              Generate
             </button>
           </div>
-        )}
-
-        {answer.length > 0 && ( // Corrected typo
-          <pre className="bg-gray-100 p-4 mt-6 text-black border border-gray-300 rounded-lg overflow-auto">
-            {answer}
-          </pre>
-        )}
-
-        <div className="bg-gray-800 p-2 rounded-md">
-          <button onClick={generateAnswer} className="text-white">
-            Generate
-          </button>
         </div>
       </div>
     </div>
