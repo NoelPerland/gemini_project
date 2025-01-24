@@ -5,7 +5,7 @@ export default function Irene() {
   const [answer, setAnswer] = useState(""); /*  */
   const [city, setCity] = useState("Stockholm");
   const [prompt, setPrompt] = useState("");
-}
+
   function sendPrompt(city, category) {
     setPrompt(`Recommend cultural places in ${city} under the category "${category}". For each place, provide:
     - A brief description.
@@ -14,17 +14,14 @@ export default function Irene() {
     - Timetable.
   
   Return the response as a valid JSON list, ensuring it does not include any formatting markers like backticks or extraneous text.`);
-
   }
-  
 
-
-  async function sendPrompt() {
+  async function generateAnswer() {
     const result = await model.generateContent(prompt);
     const data = JSON.parse(result.response.text());
     setAnswer(data);
     console.log(data);
-
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -72,7 +69,7 @@ export default function Irene() {
             {answer.first}
           </pre>
         )}
-        <button onClick={sendPrompt} className="text-black">
+        <button onClick={generateAnswer} className="text-black">
           generate
         </button>
       </div>
