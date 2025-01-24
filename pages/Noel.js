@@ -23,7 +23,7 @@ export default function Noel() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-700 to-purple-500 text-white flex flex-col items-center py-10">
+    <div className="min-h-screen bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 text-white flex flex-col items-center py-10">
       <div className="max-w-3xl w-full bg-purple-800 rounded-lg shadow-xl py-8 px-6">
         <h1 className="text-3xl font-bold mb-4 text-center text-white">
           Welcome to Gemini Chatbot

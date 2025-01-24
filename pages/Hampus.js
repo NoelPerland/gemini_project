@@ -32,7 +32,7 @@ export default function Hampus() {
   }
 
   return (
-    <div className="flex flex-col py-20 gap-16 items-center justify-center">
+    <div className="flex flex-col py-20 gap-16 items-center justify-center bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 ">
       <div className="flex flex-col gap-6">
         <h1 className="text-6xl font-semibold text-start">
           Food recommendations
@@ -42,7 +42,7 @@ export default function Hampus() {
         </p>
       </div>
 
-      <div className="flex flex-col  bg-purple-500 p-10 rounded-lg gap-6 w-2/4 flex-wrap  shadow-lg shadow-purple-900">
+      <div className="flex flex-col bg-gradient-to-b from-purple-400 via-purple-500 to-purple-800  p-10 rounded-lg gap-6 w-2/4 flex-wrap  shadow-lg shadow-gray-900">
         <div className="flex justify-between">
           <ButtonComponent title="Comfort Food" func={applyPromt} />
           <ButtonComponent title="Healthy Options" func={applyPromt} />
@@ -52,7 +52,7 @@ export default function Hampus() {
         <div className="flex justify-between">
           <ButtonComponent title="Fast Food" func={applyPromt} />
           <ButtonComponent title="International Cuisines" func={applyPromt} />
-          <ButtonComponent title="Vegetarian/Vegan" func={applyPromt} />
+          <ButtonComponent title="Vegetarian" func={applyPromt} />
           <ButtonComponent title="Breakfast" func={applyPromt} />
         </div>
         <div className="flex justify-between">
