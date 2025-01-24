@@ -3,8 +3,8 @@ import {
   FaHome,
   FaComments,
   FaUtensils,
-  FaPlane,
   FaInfoCircle,
+  FaAngellist,
 } from "react-icons/fa";
 
 export default function Header() {
@@ -49,7 +49,8 @@ export default function Header() {
               href="/Irene"
               className="flex items-center gap-2 hover:text-gray-400"
             >
-              <FaPlane /> Travel
+              <FaAngellist />
+              Cultural Tips
             </Link>
           </li>
           <li>

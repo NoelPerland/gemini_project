@@ -2,7 +2,7 @@ import { model } from "@/util/ai";
 import { useState } from "react";
 
 export default function Irene() {
-  const [answer, setAnswer] = useState(""); // Change initial state to a string
+  const [answer, setAnswer] = useState("");
   const [city, setCity] = useState("Stockholm");
   const [prompt, setPrompt] = useState("");
 
