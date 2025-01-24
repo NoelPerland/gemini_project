@@ -32,7 +32,7 @@ export default function Hampus() {
   }
 
   return (
-    <div className="flex flex-col py-20 gap-16 items-center justify-center bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 ">
+    <div className="flex flex-col py-14 gap-16 items-center justify-center bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 ">
       <div className="flex flex-col bg-gradient-to-b from-purple-400 via-purple-500 to-purple-800  p-10 rounded-lg gap-6 w-2/4 flex-wrap  shadow-lg shadow-gray-900">
         <div className="flex flex-col gap-6">
           <h1 className="text-6xl font-semibold text-center text-gray-900">
