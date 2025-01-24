@@ -5,17 +5,39 @@ export default function Irene() {
   const [answer, setAnswer] = useState(""); /*  */
   const [city, setCity] = useState("Stockholm");
   const [prompt, setPrompt] = useState("");
+<<<<<<< Updated upstream
   function sendPrompt(category) {
     setPrompt(
       `Recomend me cultural places for ${city} in the category: ${category}. Provide a description of each place, and include the following data for each: what is the main interest of the place, price for entrance, and timetable `
     );
-  }
+=======
 
+  function sendPrompt(city, category) {
+    setPrompt(`Recommend cultural places in ${city} under the category "${category}". For each place, provide:
+    - A brief description.
+    - The main interest of the place.
+    - Price for entrance.
+    - Timetable.
+  
+  Return the response as a valid JSON list, ensuring it does not include any formatting markers like backticks or extraneous text.`);
+>>>>>>> Stashed changes
+  }
+  
+
+<<<<<<< Updated upstream
   async function sendPrompt() {
     const result = await model.generateContent(prompt);
     const data = JSON.parse(result.response.text());
     setAnswer(data);
     console.log(data);
+=======
+  async function generateResult() {
+    const result = await model.generateContent(prompt);
+    const parsedAnswer = result.response.text();
+    JSON.parse(answerText);
+    setAnswer(parsedAnswer);
+    console.log(answer);
+>>>>>>> Stashed changes
   }
 
   return (
