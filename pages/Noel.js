@@ -1,3 +1,4 @@
+// Co Founder, UI Designer, Frontend Developer, 2nd Line
 import { useState } from "react";
 import { model } from "@/util/ai";
 
@@ -23,8 +24,8 @@ export default function Noel() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 text-white flex flex-col items-center py-10">
-      <div className="max-w-3xl w-full bg-purple-800 rounded-lg shadow-xl py-8 px-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-700 via-gray-700 to-gray-900 text-white flex flex-col items-center py-16">
+      <div className="max-w-3xl w-full bg-gradient-to-b from-purple-500 via-purple-600 to-purple-800 rounded-lg shadow-xl py-8 px-6">
         <h1 className="text-3xl font-bold mb-4 text-center text-white">
           Welcome to Gemini Chatbot
         </h1>
@@ -40,10 +41,10 @@ export default function Noel() {
             onChange={(e) => setPrompt(e.target.value)}
           ></textarea>
           <button
-            className={`w-full py-3 rounded-md text-lg font-semibold transition-colors ${
+            className={`w-full py-3 border border-purple-700 rounded-md text-lg font-semibold transition-colors ${
               loading
                 ? "bg-purple-600 cursor-not-allowed"
-                : "bg-purple-500 hover:bg-purple-400"
+                : "bg-purple-500 hover:bg-purple-950"
             }`}
             onClick={sendPrompt}
             disabled={loading}
@@ -51,7 +52,7 @@ export default function Noel() {
             {loading ? "Generating..." : "Send"}
           </button>
         </div>
-        <div className="mt-6 bg-purple-700 p-5 rounded-md shadow-inner">
+        <div className="mt-6 bg-purple-700 border border-purple-500 p-5 rounded-md shadow-inner">
           <p className="whitespace-pre-wrap text-purple-200">
             {answer || "The response will appear here."}
           </p>

@@ -54,7 +54,7 @@ export default function Header() {
           </li>
           <li>
             <Link
-              href="/about"
+              href="/About"
               className="flex items-center gap-2 hover:text-gray-400"
             >
               <FaInfoCircle /> About
