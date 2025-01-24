@@ -3,7 +3,7 @@ export default function ButtonComponent({ title, func }) {
     <button
       onClick={() => func(title)}
       value={title}
-      className="btn bg-white text-lg text-gray-900 hover:text-white"
+      className="btn bg-white text-lg text-gray-900 hover:text-white border-none shadow-lg"
     >
       {title}
     </button>

@@ -48,7 +48,7 @@ export default function Hampus() {
         </p>
       </div>
 
-      <div className="flex flex-col  bg-purple-400 p-10 rounded-lg gap-6 w-2/4 flex-wrap">
+      <div className="flex flex-col  bg-purple-400 p-10 rounded-lg gap-6 w-2/4 flex-wrap  shadow-lg shadow-purple-900">
         <div className="flex justify-between">
           <ButtonComponent title="Comfort Food" func={applyPromt} />
           <ButtonComponent title="Healthy Options" func={applyPromt} />
@@ -96,20 +96,23 @@ export default function Hampus() {
           </div>
         </div>
         <hr />
-        <div className="flex flex-col bg-white text-gray-900 rounded-lg">
-          <div className="flex justify-between p-5 items-center">
-            <h2 className="text-4xl font-bold">{answer.name}</h2>
-            <div className="flex">
-              <p className="p-5">{answer.portions} portions</p>
-              <p className="p-5">{answer.time}</p>
+        {answer.name && (
+          <div className="flex flex-col bg-white text-gray-900 rounded-lg">
+            <div className="flex justify-between p-5 items-center">
+              <h2 className="text-4xl font-bold">{answer.name}</h2>
+              <div className="flex">
+                <p className="p-5">{answer.portions} portions</p>
+                <p className="p-5">{answer.time}</p>
+              </div>
             </div>
-          </div>
-          <p className="text-xl font-semibold p-5">{answer.description}</p>
-          <h2 className="flex flex-col p-5 text-gray-900 text-xl font-semibold">
-            ingredients:
-          </h2>
-          {answer.name && (
-            <ul className="flex flex-col p-5 gap-1">
+            <div>
+              <p className="text-xl font-semibold p-5">{answer.description}</p>
+              <h2 className="flex flex-col p-5 text-gray-900 text-xl font-semibold">
+                ingredients:
+              </h2>
+            </div>
+
+            <ul className="flex flex-col p-5 gap-1 bg-gray-100">
               {(() => {
                 const items = [];
                 for (let i = 0; i < answer.ingredients.length; i++) {
@@ -118,12 +121,12 @@ export default function Hampus() {
                 return items;
               })()}
             </ul>
-          )}
-          <h2 className="flex flex-col p-5 text-gray-900 text-xl font-semibold">
-            Instructions:
-          </h2>
-          {answer.name && (
-            <ul className="flex flex-col p-5 gap-1">
+
+            <h2 className="flex flex-col p-5 text-gray-900 text-xl font-semibold">
+              Instructions:
+            </h2>
+
+            <ul className="flex flex-col p-5 gap-1 bg-gray-100 rounded-b-lg">
               {(() => {
                 const items = [];
                 for (let i = 0; i < answer.steps.length; i++) {
@@ -132,8 +135,8 @@ export default function Hampus() {
                 return items;
               })()}
             </ul>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
