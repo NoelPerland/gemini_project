@@ -7,13 +7,9 @@ export default function Irene() {
   const [prompt, setPrompt] = useState("");
 
   function sendPrompt(city, category) {
-    setPrompt(`Recommend cultural places in ${city} under the category "${category}". For each place, provide:
-    - A brief description.
-    - The main interest of the place.
-    - Price for entrance.
-    - Timetable.
-  
-  Return the response as a valid JSON list, ensuring it does not include any formatting markers like backticks or extraneous text.`);
+    setPrompt(
+      `Provide a valid json output without backticks nor other marks or tokens at the start and end (very important). The json should include an object(without a name and no other nested objects/arrays) with recommendations for cultural places in ${city} under the category "${category}". For each place, provide: - A brief description. - The main interest of the place. - Price for entrance. - Timetable. `
+    );
   }
 
   async function generateAnswer() {
