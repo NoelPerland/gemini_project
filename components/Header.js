@@ -5,7 +5,9 @@ import {
   FaUtensils,
   FaInfoCircle,
   FaAngellist,
+  FaGamepad,
 } from "react-icons/fa";
+import { BiSolidCameraMovie } from "react-icons/bi";
 
 export default function Header() {
   return (
@@ -51,6 +53,24 @@ export default function Header() {
             >
               <FaAngellist />
               Cultural Tips
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/Karro"
+              className="flex items-center gap-2 hover:text-gray-400"
+            >
+              <FaGamepad />
+              Game
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/Helin"
+              className="flex items-center gap-2 hover:text-gray-400"
+            >
+              <BiSolidCameraMovie />
+              Movies
             </Link>
           </li>
           <li>

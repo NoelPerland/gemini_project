@@ -56,8 +56,9 @@ export default function Home() {
                   Cultural Tips
                 </h3>
                 <p className="text-gray-600">
-                  Discover the best cultutal events going on around in the biggest swedish cities with our AI cultural-guide with personalized trips
-                  for unforgettable time!
+                  Discover the best cultutal events going on around in the
+                  biggest swedish cities with our AI cultural-guide with
+                  personalized trips for unforgettable time!
                 </p>
                 <br />
               </a>
@@ -70,7 +71,9 @@ export default function Home() {
                 className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
               >
                 <h3 className="text-xl font-bold mb-2 text-slate-700">Karro</h3>
-                <p className="text-gray-600">Brief descripton</p>
+                <p className="text-gray-600">
+                  Learn and play with AI-generated flashcards!
+                </p>
               </a>
             </div>
             <div>
@@ -79,7 +82,11 @@ export default function Home() {
                 className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
               >
                 <h3 className="text-xl font-bold mb-2 text-slate-700">Helin</h3>
-                <p className="text-gray-600">Brief descripton</p>
+                <p className="text-gray-600">
+                  Tell me your favorite genres, actors, or even just a feeling
+                  you're looking for and I'll help you discover your next
+                  cinematic obsession. Let's find your perfect movie!
+                </p>
               </a>
             </div>
           </div>
