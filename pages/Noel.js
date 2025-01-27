@@ -44,7 +44,7 @@ export default function Noel() {
             className={`w-full py-3 border border-purple-700 rounded-md text-lg font-semibold transition-colors ${
               loading
                 ? "bg-purple-600 cursor-not-allowed"
-                : "bg-purple-500 hover:bg-purple-950"
+                : "bg-purple-500 hover:bg-purple-800"
             }`}
             onClick={sendPrompt}
             disabled={loading}
