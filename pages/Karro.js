@@ -39,7 +39,6 @@ export default function FlashcardGame() {
               question: questionMatch ? questionMatch[1] : "Unknown Question",
               answer: answerMatch ? answerMatch[1] : "Unknown Answer",
               userAnswer: "",
-              isCorrect: null,
             };
           });
       }
@@ -89,14 +88,9 @@ export default function FlashcardGame() {
     const userAnswer = card.userAnswer.trim().toLowerCase();
     const correctAnswer = card.answer.trim().toLowerCase();
 
-    // Hämta matchad text och procentuell matchning
-    const { highlightedAnswer, matchPercentage } = highlightText(correctAnswer, userAnswer);
+    const { highlightedAnswer } = highlightText(correctAnswer, userAnswer);
 
-    // Om matchningen är minst 30%, markera det som korrekt
-    const isCorrect = matchPercentage >= 30;
-    updatedCards[index].isCorrect = isCorrect;
     updatedCards[index].highlightedAnswer = highlightedAnswer; // Spara markerat svar
-    updatedCards[index].matchPercentage = matchPercentage;
 
     setFlashcards(updatedCards);
   }
