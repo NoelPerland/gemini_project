@@ -53,11 +53,11 @@ export default function Home() {
                 className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
               >
                 <h3 className="text-xl font-bold mb-2 text-slate-700">
-                  Travel Guide
+                  Cultural Tips
                 </h3>
                 <p className="text-gray-600">
-                  Discover smarter travel with our AI guide—personalized trips
-                  and real-time tips for unforgettable adventures!
+                  Discover the best cultutal events going on around in the biggest swedish cities with our AI cultural-guide with personalized trips
+                  for unforgettable time!
                 </p>
                 <br />
               </a>
