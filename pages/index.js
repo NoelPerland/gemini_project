@@ -57,8 +57,7 @@ export default function Home() {
                 </h3>
                 <p className="text-gray-600">
                   Discover the best cultutal events going on around in the
-                  biggest swedish cities with our AI cultural-guide with
-                  personalized trips for unforgettable time!
+                  bcities with our AI cultural-guide with personalized trips!
                 </p>
                 <br />
               </a>
@@ -72,7 +71,9 @@ export default function Home() {
               >
                 <h3 className="text-xl font-bold mb-2 text-slate-700">Karro</h3>
                 <p className="text-gray-600">
-                  Learn and play with AI-generated flashcards!
+                  Learn and play with AI-generated flashcards, designed to make
+                  studying fun and engaging! Explore a wide variety of topics,
+                  test your knowledge, and improve your skills effortlessly.
                 </p>
               </a>
             </div>
