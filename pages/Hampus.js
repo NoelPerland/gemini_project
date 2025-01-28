@@ -1,5 +1,5 @@
 import ButtonComponent from "@/components/ButtonComponent";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { model } from "@/util/ai";
 import { CgArrowDownO } from "react-icons/cg";
 import { CgArrowUpO } from "react-icons/cg";
@@ -66,21 +66,21 @@ export default function Hampus() {
       <div className="flex justify-center">
         {!show && (
           <button
-            className="flex  opacity-50 justify-center items-center gap-2 border-2 border-gray-300 rounded-full p-2 text-gray-300 hover:text-white hover:white hover:opacity-100"
+            className="flex text-sm  opacity-50 justify-center items-center gap-2 border-2 border-gray-300 rounded-full p-2 text-gray-300 hover:text-white hover:white hover:opacity-100"
             onClick={showMore}
           >
             <p>More Categories</p>
-            <CgArrowDownO className="text-4xl" />
+            <CgArrowDownO className="text-xl" />
           </button>
         )}
 
         {show && (
           <button
-            className="flex  opacity-50 justify-center items-center gap-2 border-2 border-gray-300 rounded-full p-2 text-gray-300 hover:text-white hover:white hover:opacity-100"
+            className="flex text-sm opacity-50 justify-center items-center gap-2 border-2 border-gray-300 rounded-full p-2 text-gray-300 hover:text-white hover:white hover:opacity-100"
             onClick={showMore}
           >
             <p>Show Less</p>
-            <CgArrowUpO className="text-4xl" />
+            <CgArrowUpO className="text-xl" />
           </button>
         )}
       </div>
