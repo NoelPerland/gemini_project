@@ -14,9 +14,10 @@ export default function Hampus() {
   const [show, setShow] = useState(false);
   const [inputTitle, setInputTitle] = useState("Food Categories");
   const [showModal, setShowModal] = useState(false);
-
+  const [answerHistory, setAnswerHistory] = useState([""]);
   const [isLoading, setIsLoading] = useState(false);
-  const [history, setHistory] = useState([]);
+  const [showRecipe, setShowRecipe] = useState(false);
+  const [history, setHistory] = useState([""]);
 
   function showMore() {
     if (!show) {
@@ -40,10 +41,26 @@ export default function Hampus() {
     setAnswer(data);
     setShow(false);
     //Update history:
-    const newHistory = [...history];
-    newHistory.push(data.name);
-    setHistory(newHistory);
+    if (history.length > 0) {
+      const newHistory = [...history];
+      newHistory.push(data.name);
+      setHistory(newHistory);
+
+      const newAnswerHistory = [...answerHistory];
+      newAnswerHistory.push(data);
+      setAnswerHistory(newAnswerHistory);
+    } else {
+      const newHistory = [];
+      newHistory.push(data.name);
+      setHistory(newHistory);
+
+      const newAnswerHistory = [];
+      newAnswerHistory.push(data);
+      setAnswerHistory(newAnswerHistory);
+    }
     setIsLoading(false);
+    setShowModal(false);
+    setShowRecipe(true);
   }
 
   function addCategory(e) {
@@ -51,6 +68,15 @@ export default function Hampus() {
       `Provide a valid json output without backticks at the start and end (very important). Provide the following data - name, desciptsion, time, ingredients(array), steps(array) and portions (No other external objects,arrays or keys can be provided!) Give me one meal within the category ${e.target.value}. Measurment should be in l,dl,ml, teaspoon and tablespoon.Never generate the same meal twice in a row`
     );
   }
+
+  function recoverHistory(index) {
+    setShowModal(false);
+    setIsLoading(true);
+    setAnswer(answerHistory[index]);
+    setIsLoading(false);
+    setShowRecipe(true);
+  }
+
   function openModal() {
     if (!showModal) {
       setShowModal(true);
@@ -65,9 +91,10 @@ export default function Hampus() {
   }, []);
 
   useEffect(() => {
-    if (history.length > 0)
+    if (history.length > 0) {
       localStorage.setItem("history", JSON.stringify(history));
-  }, [history]);
+    }
+  }, [answer]);
 
   return (
     <div className="flex flex-col font-sans bg-white to-gray-950 px-20 py-40 gap-10">
@@ -163,11 +190,15 @@ export default function Hampus() {
       </div>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <ModalComponent showModal={openModal} history={history} />
+          <ModalComponent
+            showModal={openModal}
+            history={history}
+            recoverHistory={recoverHistory}
+          />
         </div>
       )}
 
-      {answer.name && (
+      {showRecipe && (
         <div className="flex flex-col bg-white text-gray-900 rounded-lg box-border shadow-xl">
           <button
             onClick={() => {
@@ -252,6 +283,7 @@ export default function Hampus() {
           </ul>
           <button
             onClick={() => {
+              setShowRecipe(false);
               setAnswer([]);
             }}
             className="flex bg-gray-200 justify-center text-4xl p-5 hover:bg-purple-500 hover:text-white rounded-b-lg"
