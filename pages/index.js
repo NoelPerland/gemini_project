@@ -57,8 +57,7 @@ export default function Home() {
                 </h3>
                 <p className="text-gray-600">
                   Discover the best cultutal events going on around in the
-                  biggest swedish cities with our AI cultural-guide with
-                  personalized trips for unforgettable time!
+                  bcities with our AI cultural-guide with personalized trips!
                 </p>
                 <br />
               </a>
@@ -72,7 +71,9 @@ export default function Home() {
               >
                 <h3 className="text-xl font-bold mb-2 text-slate-700">Karro</h3>
                 <p className="text-gray-600">
-                  Learn and play with AI-generated flashcards!
+                  Learn and play with AI-generated flashcards, designed to make
+                  studying fun and engaging! Explore a wide variety of topics,
+                  test your knowledge, and improve your skills effortlessly.
                 </p>
               </a>
             </div>
@@ -81,12 +82,8 @@ export default function Home() {
                 href="/Helin"
                 className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
               >
-                <h3 className="text-xl font-bold mb-2 text-slate-700">Helin</h3>
-                <p className="text-gray-600">
-                  Tell me your favorite genres, actors, or even just a feeling
-                  you're looking for and I'll help you discover your next
-                  cinematic obsession. Let's find your perfect movie!
-                </p>
+                <h3 className="text-xl font-bold mb-2 text-slate-700">Movie Recommendations</h3>
+                <p className="text-gray-600">Discover your next favorite film with MovieMind, that understands your unique taste. Simply chat with our AI about your movie preferences, favorite genres, or current mood, and receive personalized suggestions. </p>
               </a>
             </div>
           </div>
