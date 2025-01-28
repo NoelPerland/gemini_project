@@ -82,7 +82,7 @@ export default function Home() {
                 className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
               >
                 <h3 className="text-xl font-bold mb-2 text-slate-700">Movie Recommendations</h3>
-                <p className="text-gray-600">Discover your next favorite film with MovieMind, that understands your unique taste. Simply chat with our AI about your movie preferences, favorite genres, or current mood, and receive personalized suggestions. </p>
+                <p className="text-gray-600">Discover your next favorite film with MovieMind, simply chat with our AI about your movie preferences, favorite genres and receive personalized suggestions. </p>
               </a>
             </div>
           </div>
