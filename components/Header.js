@@ -16,7 +16,7 @@ export default function Header() {
         {/* Logo or Brand Name */}
         <div className="text-xl font-bold">
           <Link href="/" className="hover:text-gray-400">
-            MyGeminiApp
+            MvidiaGeminiApp
           </Link>
         </div>
 

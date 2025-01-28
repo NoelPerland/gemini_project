@@ -5,7 +5,7 @@ export default function Home() {
       <section className="bg-purple-700 text-white text-center py-20">
         <div className="container mx-auto px-6">
           <h1 className="text-4xl font-bold mb-4">
-            Welcome to Our Gemini AI Project
+            Welcome to Nvidia Gemini AI Project
           </h1>
           <p className="text-lg mb-6">Noel, Irene, Helin, Hampus, Karo</p>
         </div>
@@ -82,8 +82,14 @@ export default function Home() {
                 href="/Helin"
                 className="bg-purple-400  hover:bg-purple-500 p-6 shadow rounded-lg block text-center"
               >
-                <h3 className="text-xl font-bold mb-2 text-slate-700">Movie Recommendations</h3>
-                <p className="text-gray-600">Discover your next favorite film with MovieMind, simply chat with our AI about your movie preferences, favorite genres and receive personalized suggestions. </p>
+                <h3 className="text-xl font-bold mb-2 text-slate-700">
+                  Movie Recommendations
+                </h3>
+                <p className="text-gray-600">
+                  Discover your next favorite film with MovieMind, simply chat
+                  with our AI about your movie preferences, favorite genres and
+                  receive personalized suggestions.{" "}
+                </p>
               </a>
             </div>
           </div>
