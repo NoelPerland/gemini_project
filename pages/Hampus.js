@@ -88,13 +88,17 @@ export default function Hampus() {
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("history"));
     setHistory(data);
+
+    const data2 = JSON.parse(localStorage.getItem("answerHistory"));
+    setAnswerHistory(data2);
   }, []);
 
   useEffect(() => {
     if (history.length > 0) {
       localStorage.setItem("history", JSON.stringify(history));
+      localStorage.setItem("answerHistory", JSON.stringify(answerHistory));
     }
-  }, [answer]);
+  }, [history]);
 
   return (
     <div className="flex flex-col font-sans bg-white to-gray-950 px-20 py-40 gap-10">
