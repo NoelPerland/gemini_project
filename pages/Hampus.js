@@ -1,7 +1,11 @@
-import ButtonComponent from "@/components/ButtonComponent";
 import { useEffect, useState } from "react";
 import { model } from "@/util/ai";
+
+//Components
+import ButtonComponent from "@/components/ButtonComponent";
 import ModalComponent from "@/components/ModalComponent";
+
+//Icons:
 import { CgArrowDownO } from "react-icons/cg";
 import { CgArrowUpO } from "react-icons/cg";
 import { CgCloseO } from "react-icons/cg";
@@ -9,16 +13,22 @@ import { IoReloadCircleOutline } from "react-icons/io5";
 import { FaHistory } from "react-icons/fa";
 
 export default function Hampus() {
+  //states
   const [promt, setPromt] = useState("");
-  const [answer, setAnswer] = useState([]);
-  const [show, setShow] = useState(false);
   const [inputTitle, setInputTitle] = useState("Food Categories");
-  const [showModal, setShowModal] = useState(false);
+
+  //states []
+  const [answer, setAnswer] = useState([]);
+  const [history, setHistory] = useState([""]);
   const [answerHistory, setAnswerHistory] = useState([""]);
+
+  //state Booleans
+  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showRecipe, setShowRecipe] = useState(false);
-  const [history, setHistory] = useState([""]);
 
+  //Toggle show state
   function showMore() {
     if (!show) {
       setShow(true);
@@ -27,19 +37,28 @@ export default function Hampus() {
     }
   }
 
+  //apply promt when clicking with selected category
   function applyPromt(title) {
     setPromt(
       `Provide a valid json output without backticks at the start and end (very important). Provide the following data - name, desciptsion, time, ingredients(array), steps(array) and portions (No other external objects,arrays or keys can be provided!) Give me one meal within the category ${title}. Measurment should be in l,dl,ml, teaspoon and tablespoon. Never generate the same meal twice in a row`
     );
+    //apply selected category to placeholder (input text-field)
     setInputTitle(title);
   }
 
+  //Get api data
   async function sendPromt() {
+    //apply loader to generate button
     setIsLoading(true);
+
+    //get data
     const result = await model.generateContent(promt);
     const data = JSON.parse(result.response.text());
     setAnswer(data);
+
+    //Hide extended categories
     setShow(false);
+
     //Update history:
     if (history.length > 0) {
       const newHistory = [...history];
@@ -58,25 +77,37 @@ export default function Hampus() {
       newAnswerHistory.push(data);
       setAnswerHistory(newAnswerHistory);
     }
+
+    //remove loader from generate button
     setIsLoading(false);
+    //Hide history modal if open
     setShowModal(false);
+    //Show recipe
     setShowRecipe(true);
   }
 
+  //set food category through text input
   function addCategory(e) {
     setPromt(
       `Provide a valid json output without backticks at the start and end (very important). Provide the following data - name, desciptsion, time, ingredients(array), steps(array) and portions (No other external objects,arrays or keys can be provided!) Give me one meal within the category ${e.target.value}. Measurment should be in l,dl,ml, teaspoon and tablespoon.Never generate the same meal twice in a row`
     );
   }
 
+  //apply selected history recipe to be recovered and displayed
   function recoverHistory(index) {
+    //hide history modal
     setShowModal(false);
+    //apply loader to generate button
     setIsLoading(true);
+    //get history data
     setAnswer(answerHistory[index]);
+    //remove loader from generate button
     setIsLoading(false);
+    //show recipe
     setShowRecipe(true);
   }
 
+  //open history modal
   function openModal() {
     if (!showModal) {
       setShowModal(true);
@@ -85,6 +116,7 @@ export default function Hampus() {
     }
   }
 
+  //get localstarage on page load
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("history"));
     setHistory(data);
@@ -93,6 +125,7 @@ export default function Hampus() {
     setAnswerHistory(data2);
   }, []);
 
+  //update local storange
   useEffect(() => {
     if (history.length > 0) {
       localStorage.setItem("history", JSON.stringify(history));
