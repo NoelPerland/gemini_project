@@ -47,7 +47,7 @@ export default function Irene() {
       <div className="bg-gradient-to-b from-purple-500 via-purple-700 to-purple-900  text-white flex flex-col items-center mx-40 rounded-lg">
         <div className="bg-purple-400 shadow-md rounded-lg p-8 w-[600px] h-[400px] m-20">
           <h2 className="text-3xl text-whi font-bold text-center mb-6">
-            Best Cultural Tips
+            Best Cultural Tips For You
           </h2>
           <select
             className="text-slate-800 w-full border border-gray-800 rounded-lg p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-slate-400 mr-2 bg-purple-300"
