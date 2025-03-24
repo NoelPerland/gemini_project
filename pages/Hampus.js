@@ -134,12 +134,12 @@ export default function Hampus() {
   }, [history]);
 
   return (
-    <div className="flex flex-col font-sans bg-white to-gray-950 p-10 lg:px-20 py-20 lg:py-40 gap-10">
+    <div className="flex flex-col font-sans bg-white to-gray-950 p-5 lg:p-10 lg:px-20  py-16 lg:py-40 gap-10">
       <div className="flex flex-col items-stretch text-center">
         <h1 className="text-xl font-bold text-center text-gray-400 pb-2">
           Recipes
         </h1>
-        <h2 className="text-center font-title text-4xl lg:text-6xl text-gray-800 font-bold mb-20 lg:mb-40 drop-shadow-lg">
+        <h2 className="text-center font-title text-4xl lg:text-6xl text-gray-800 font-bold mb-16 lg:mb-40 drop-shadow-lg">
           What are you craving for?
         </h2>
         <div className="font-title">
@@ -158,17 +158,15 @@ export default function Hampus() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 mt-20">
-        <div className="flex justify-center gap-5">
+      <div className="flex flex-col gap-5 mt-16 lg:mt-20">
+        <div className="flex flex-wrap justify-center gap-5">
           <ButtonComponent title="Comfort Food" func={applyPromt} />
           <ButtonComponent title="Healthy Options" func={applyPromt} />
           <ButtonComponent title="Sweet Treats" func={applyPromt} />
-          <ButtonComponent title="Savory Snacks" func={applyPromt} />
-        </div>
 
-        {show && (
-          <div className="flex flex-col gap-5">
-            <div className="flex justify-center gap-5">
+          {show && (
+            <>
+              <ButtonComponent title="Savory Snacks" func={applyPromt} />
               <ButtonComponent title="Fast Food" func={applyPromt} />
               <ButtonComponent
                 title="International Cuisines"
@@ -176,22 +174,18 @@ export default function Hampus() {
               />
               <ButtonComponent title="Vegetarian" func={applyPromt} />
               <ButtonComponent title="Breakfast" func={applyPromt} />
-            </div>
-            <div className="flex justify-center gap-5">
               <ButtonComponent title="Seafood" func={applyPromt} />
               <ButtonComponent title="Light Bites" func={applyPromt} />
               <ButtonComponent title="Cheat Meals" func={applyPromt} />
               <ButtonComponent title="Late-Night Cravings" func={applyPromt} />
-            </div>
 
-            <div id="example" className="flex justify-center gap-5">
               <ButtonComponent title="Spicy Foods" func={applyPromt} />
               <ButtonComponent title="Grilled & BBQ" func={applyPromt} />
               <ButtonComponent title="Drinks & Smoothies" func={applyPromt} />
               <ButtonComponent title="Fine Dining" func={applyPromt} />
-            </div>
-          </div>
-        )}
+            </>
+          )}
+        </div>
       </div>
 
       <hr />
@@ -202,7 +196,7 @@ export default function Hampus() {
             className="flex font-title text-sm justify-center items-center gap-2 border-2 border-gray-500 rounded-full p-5  text-gray-500 hover:text-gray-800"
             onClick={showMore}
           >
-            <p>More Categories</p>
+            <p>Show More</p>
             <CgArrowDownO className="text-xl" />
           </button>
         )}
@@ -236,19 +230,21 @@ export default function Hampus() {
       )}
 
       {showRecipe && (
-        <div className="flex flex-col bg-white text-gray-900 rounded-lg box-border shadow-xl">
+        <div className="flex flex-col bg-white text-gray-900 rounded-lg box-border shadow-xl shadow-gray-500">
           <button
             onClick={() => {
               sendPromt();
             }}
-            className="flex bg-gray-100 justify-center text-4xl p-5 hover:bg-purple-500 hover:text-white rounded-t-lg"
+            className="flex bg-purple-500 text-white lg:text-base  justify-center text-4xl p-5  hover:bg-purple-700 rounded-t-lg"
           >
-            <IoReloadCircleOutline />
+            <IoReloadCircleOutline className="text-xl lg:text-5xl" />
           </button>
-          <div className="flex justify-between p-5 items-center">
-            <h2 className="text-5xl font-title">{answer.name}</h2>
-            <div className="flex flex-col p-5 items-end">
-              <div className="rating justify-end pb-5">
+          <div className="flex justify-between p-5 items-center bg-purple-300">
+            <h2 className="text-2xl lg:text-5xl font-title text-center">
+              {answer.name}
+            </h2>
+            <div className="hidden lg:flex flex-col p-5 items-end">
+              <div className=" rating justify-end pb-5">
                 <input
                   type="radio"
                   name="rating-1"
@@ -276,22 +272,28 @@ export default function Hampus() {
                   className="mask mask-star bg-purple-900"
                 />
               </div>
-              <div className="flex flex-row gap-2">
+              <div className="hidden lg:flex flex-row gap-2">
                 <p>{answer.portions} portions</p>
                 <p>{answer.time}</p>
               </div>
             </div>
           </div>
+          <div className="flex text-white bg-purple-200 border-b-4 border-purple-300 border-dashed lg:hidden px-5 justify-between font-bold py-5">
+            <p className="bg-gray-600 p-2 rounded-lg">
+              {answer.portions} portions
+            </p>
+            <p className="bg-gray-600 p-2 rounded-lg">{answer.time}</p>
+          </div>
           <div>
-            <p className="text-xl px-5 py-10 bg-gray-100">
+            <p className="text-md lg:text-xl px-5 py-5 lg:py-10 bg-purple-200">
               {answer.description}
             </p>
-            <h2 className="flex flex-col px-5 py-10 text-gray-900 text-3xl font-semibold">
+            <h2 className="flex bg-purple-300 flex-col px-5 py-5 lg:py-10 text-gray-900 text-xl lg:text-3xl font-semibold">
               Ingredients:
             </h2>
           </div>
 
-          <ul className="flex flex-col px-5 py-10 gap-1 bg-gray-100 text-2xl">
+          <ul className="flex flex-col px-5 py-5 lg:py-10 gap-1 bg-purple-200 text-md lg:text-2xl">
             {(() => {
               const items = [];
               for (let i = 0; i < answer.ingredients.length; i++) {
@@ -301,11 +303,11 @@ export default function Hampus() {
             })()}
           </ul>
 
-          <h2 className="flex flex-col px-5 py-10 text-gray-900 text-3xl font-semibold">
+          <h2 className="flex bg-purple-300 flex-col px-5 py-5 lg:py-10 text-gray-900 text-3xl font-semibold">
             Instructions:
           </h2>
 
-          <ul className="flex flex-col px-5 py-10 gap-1 bg-gray-100 rounded-b-lg text-2xl">
+          <ul className="flex flex-col px-5 py-5 lg:py-10 gap-1 bg-purple-200 rounded-b-lg text-md lg:text-2xl">
             {(() => {
               const items = [];
               for (let i = 0; i < answer.steps.length; i++) {
@@ -323,7 +325,7 @@ export default function Hampus() {
               setShowRecipe(false);
               setAnswer([]);
             }}
-            className="flex bg-gray-200 justify-center text-4xl p-5 hover:bg-purple-500 hover:text-white rounded-b-lg"
+            className="flex bg-purple-500 justify-center text-4xl p-5 hover:bg-purple-700 text-white rounded-b-lg"
           >
             <CgCloseO />
           </button>
