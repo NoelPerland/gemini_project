@@ -77,7 +77,11 @@ export default function Header() {
         </ul>
 
         <div className="lg:hidden dropdown dropdown-end dropdown-hover">
-          <div tabIndex={0} role="button" className="btn m-1">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn bg-gray-900 shadow-none border-none text-2xl text-white"
+          >
             <IoIosArrowDropdownCircle />
           </div>
           <ul
