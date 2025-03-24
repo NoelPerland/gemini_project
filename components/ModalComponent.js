@@ -12,7 +12,7 @@ export default function ModalComponent({ showModal, history, recoverHistory }) {
               if (history[i]) {
                 items.push(
                   <li
-                    className="hover:text-purple-500 hover:cursor-pointer"
+                    className="w-full hover:text-purple-500 hover:cursor-pointer"
                     onClick={() => {
                       recoverHistory(history.length - i);
                     }}
