@@ -4,6 +4,7 @@ import { model } from "@/util/ai";
 //Components
 import ButtonComponent from "@/components/ButtonComponent";
 import ModalComponent from "@/components/ModalComponent";
+import FavoriteModal from "@/components/FavoriteModal";
 
 //Icons:
 import { CgArrowDownO } from "react-icons/cg";
@@ -11,22 +12,27 @@ import { CgArrowUpO } from "react-icons/cg";
 import { CgCloseO } from "react-icons/cg";
 import { IoReloadCircleOutline } from "react-icons/io5";
 import { FaHistory } from "react-icons/fa";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 export default function Hampus() {
   //states
   const [promt, setPromt] = useState("");
   const [inputTitle, setInputTitle] = useState("Food Categories");
+  const [favoritePopup, setFavoritePopup] = useState("hidden");
 
   //states []
   const [answer, setAnswer] = useState([]);
   const [history, setHistory] = useState([""]);
   const [answerHistory, setAnswerHistory] = useState([""]);
+  const [favorites, setFavorites] = useState([]);
 
   //state Booleans
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showRecipe, setShowRecipe] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   //Toggle show state
   function showMore() {
@@ -123,6 +129,9 @@ export default function Hampus() {
 
     const data2 = JSON.parse(localStorage.getItem("answerHistory"));
     setAnswerHistory(data2);
+
+    /* const data3 = JSON.parse(localStorage.getItem("favorites"));
+    setFavorites(data3); */
   }, []);
 
   //update local storange
@@ -133,204 +142,217 @@ export default function Hampus() {
     }
   }, [history]);
 
-  return (
-    <div className="flex flex-col font-sans bg-white to-gray-950 p-5 lg:p-10 lg:px-20  py-16 lg:py-40 gap-10">
-      <div className="flex flex-col items-stretch text-center">
-        <h1 className="text-xl font-bold text-center text-gray-400 pb-2">
-          Recipes
-        </h1>
-        <h2 className="text-center font-title text-4xl lg:text-6xl text-gray-800 font-bold mb-16 lg:mb-40 drop-shadow-lg">
-          What are you craving for?
-        </h2>
-        <div className="font-title">
-          <input
-            onChange={addCategory}
-            type="text"
-            className="bg-gray-100 w-3/5 lg:w-2/5 h-20 p-5 rounded-l-lg text-gray-800 text-lg lg:text-xl outline-none"
-            placeholder={inputTitle}
-          ></input>
-          <button
-            onClick={sendPromt}
-            className="btn-xs lg:btn-lg rounded-r-lg font-title h-20 bg-gray-800 text-lg lg:text-xl text-white border-none hover:bg-gray-900"
-          >
-            {isLoading ? "Loading..." : "Generate"}
-          </button>
-        </div>
-      </div>
+  //Update Favorites
 
-      <div className="flex flex-col gap-5 mt-16 lg:mt-20">
-        <div className="flex flex-wrap justify-center gap-5">
-          <ButtonComponent title="Comfort Food" func={applyPromt} />
-          <ButtonComponent title="Healthy Options" func={applyPromt} />
-          <ButtonComponent title="Sweet Treats" func={applyPromt} />
+  function updateFavorites() {
+    setFavoritePopup("fixed");
+    if (!favorites.includes(answer)) {
+      const newArray = [...favorites, answer];
+      setFavorites(newArray);
+      setIsFavorite(true);
+    } else {
+      const newArray = favorites.map((favorite) => favorite !== answer);
+      setFavorites(newArray);
+      setIsFavorite(false);
+    }
+    setTimeout(() => {
+      setFavoritePopup("hidden");
+    }, 2000);
+  }
+
+  return (
+    <>
+      <div className="flex justify-end bg-white pr-5 pt-5">
+        <MdFavorite
+          className="text-gray-800 text-5xl"
+          onClick={() => setShowFavorites(!showFavorites)}
+        />
+      </div>
+      <FavoriteModal
+        favorites={favorites}
+        setAnswer={setAnswer}
+        show={showFavorites}
+      />
+      <div className="flex flex-col font-sans bg-white to-gray-950 p-5 lg:p-10 lg:px-20  py-16 lg:py-40 gap-10">
+        <div className="flex flex-col items-stretch text-center">
+          <h1 className="text-xl font-bold text-center text-gray-400 pb-2">
+            Recipes
+          </h1>
+          <h2 className="text-center font-title text-4xl lg:text-6xl text-gray-800 font-bold mb-16 lg:mb-40 drop-shadow-lg">
+            What are you craving for?
+          </h2>
+          <div className="font-title">
+            <input
+              onChange={addCategory}
+              type="text"
+              className="bg-gray-100 w-3/5 lg:w-2/5 h-20 p-5 rounded-l-lg text-gray-800 text-lg lg:text-xl outline-none"
+              placeholder={inputTitle}
+            ></input>
+            <button
+              onClick={sendPromt}
+              className="btn-xs lg:btn-lg rounded-r-lg font-title h-20 bg-gray-800 text-lg lg:text-xl text-white border-none hover:bg-gray-900"
+            >
+              {isLoading ? "Loading..." : "Generate"}
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-5 mt-16 lg:mt-20">
+          <div className="flex flex-wrap justify-center gap-5">
+            <ButtonComponent title="Comfort Food" func={applyPromt} />
+            <ButtonComponent title="Healthy Options" func={applyPromt} />
+            <ButtonComponent title="Sweet Treats" func={applyPromt} />
+
+            {show && (
+              <>
+                <ButtonComponent title="Savory Snacks" func={applyPromt} />
+                <ButtonComponent title="Fast Food" func={applyPromt} />
+                <ButtonComponent
+                  title="International Cuisines"
+                  func={applyPromt}
+                />
+                <ButtonComponent title="Vegetarian" func={applyPromt} />
+                <ButtonComponent title="Breakfast" func={applyPromt} />
+                <ButtonComponent title="Seafood" func={applyPromt} />
+                <ButtonComponent title="Light Bites" func={applyPromt} />
+                <ButtonComponent title="Cheat Meals" func={applyPromt} />
+                <ButtonComponent
+                  title="Late-Night Cravings"
+                  func={applyPromt}
+                />
+
+                <ButtonComponent title="Spicy Foods" func={applyPromt} />
+                <ButtonComponent title="Grilled & BBQ" func={applyPromt} />
+                <ButtonComponent title="Drinks & Smoothies" func={applyPromt} />
+                <ButtonComponent title="Fine Dining" func={applyPromt} />
+              </>
+            )}
+          </div>
+        </div>
+
+        <hr />
+
+        <div className="flex justify-center gap-5">
+          {!show && (
+            <button
+              className="flex font-title text-sm justify-center items-center gap-2 border-2 border-gray-500 rounded-full p-5  text-gray-500 hover:text-gray-800"
+              onClick={showMore}
+            >
+              <p>Show More</p>
+              <CgArrowDownO className="text-xl" />
+            </button>
+          )}
 
           {show && (
-            <>
-              <ButtonComponent title="Savory Snacks" func={applyPromt} />
-              <ButtonComponent title="Fast Food" func={applyPromt} />
-              <ButtonComponent
-                title="International Cuisines"
-                func={applyPromt}
-              />
-              <ButtonComponent title="Vegetarian" func={applyPromt} />
-              <ButtonComponent title="Breakfast" func={applyPromt} />
-              <ButtonComponent title="Seafood" func={applyPromt} />
-              <ButtonComponent title="Light Bites" func={applyPromt} />
-              <ButtonComponent title="Cheat Meals" func={applyPromt} />
-              <ButtonComponent title="Late-Night Cravings" func={applyPromt} />
-
-              <ButtonComponent title="Spicy Foods" func={applyPromt} />
-              <ButtonComponent title="Grilled & BBQ" func={applyPromt} />
-              <ButtonComponent title="Drinks & Smoothies" func={applyPromt} />
-              <ButtonComponent title="Fine Dining" func={applyPromt} />
-            </>
+            <button
+              className="flex font-title text-sm justify-center items-center gap-2 border-2 border-gray-500 rounded-full p-5 text-gray-500 hover:text-gray-800"
+              onClick={showMore}
+            >
+              <p>Show Less</p>
+              <CgArrowUpO className="text-xl" />
+            </button>
           )}
-        </div>
-      </div>
 
-      <hr />
-
-      <div className="flex justify-center gap-5">
-        {!show && (
-          <button
-            className="flex font-title text-sm justify-center items-center gap-2 border-2 border-gray-500 rounded-full p-5  text-gray-500 hover:text-gray-800"
-            onClick={showMore}
-          >
-            <p>Show More</p>
-            <CgArrowDownO className="text-xl" />
-          </button>
-        )}
-
-        {show && (
           <button
             className="flex font-title text-sm justify-center items-center gap-2 border-2 border-gray-500 rounded-full p-5 text-gray-500 hover:text-gray-800"
-            onClick={showMore}
+            onClick={openModal}
           >
-            <p>Show Less</p>
-            <CgArrowUpO className="text-xl" />
+            <p>History</p>
+            <FaHistory className="text-xl" />
           </button>
+        </div>
+        {showModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <ModalComponent
+              showModal={openModal}
+              history={history}
+              recoverHistory={recoverHistory}
+            />
+          </div>
         )}
 
-        <button
-          className="flex font-title text-sm justify-center items-center gap-2 border-2 border-gray-500 rounded-full p-5 text-gray-500 hover:text-gray-800"
-          onClick={openModal}
-        >
-          <p>History</p>
-          <FaHistory className="text-xl" />
-        </button>
-      </div>
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <ModalComponent
-            showModal={openModal}
-            history={history}
-            recoverHistory={recoverHistory}
-          />
-        </div>
-      )}
+        {showRecipe && (
+          <div className="flex flex-col bg-white text-gray-900 rounded-lg box-border shadow-xl shadow-gray-500">
+            <button
+              onClick={() => {
+                sendPromt();
+              }}
+              className="flex bg-purple-500 text-white lg:text-base  justify-center text-4xl p-5  hover:bg-purple-800 rounded-t-lg"
+            >
+              <IoReloadCircleOutline className="text-xl lg:text-5xl" />
+            </button>
+            <div className="flex justify-center p-5 items-center bg-purple-300">
+              <h2 className="flex flex-wrap text-2xl lg:py-5 lg:text-6xl font-title text-center">
+                {answer.name}
+              </h2>
+            </div>
+            <div className="flex text-white bg-purple-200 border-b-4 border-purple-300 border-dashed lg:hidden px-5 justify-between font-bold py-5">
+              <p className="bg-gray-600 p-2 rounded-lg">
+                {answer.portions} portions
+              </p>
+              <p className="bg-gray-600 p-2 rounded-lg">{answer.time}</p>
+            </div>
+            <div>
+              <p className="text-md lg:text-2xl px-5 py-5 lg:py-10 bg-purple-200">
+                {answer.description}
+              </p>
+              <h2 className="flex bg-purple-300 flex-col px-5 py-5 lg:py-10 text-gray-900 text-xl lg:text-3xl font-semibold">
+                Ingredients:
+              </h2>
+            </div>
 
-      {showRecipe && (
-        <div className="flex flex-col bg-white text-gray-900 rounded-lg box-border shadow-xl shadow-gray-500">
-          <button
-            onClick={() => {
-              sendPromt();
-            }}
-            className="flex bg-purple-500 text-white lg:text-base  justify-center text-4xl p-5  hover:bg-purple-700 rounded-t-lg"
-          >
-            <IoReloadCircleOutline className="text-xl lg:text-5xl" />
-          </button>
-          <div className="flex justify-between p-5 items-center bg-purple-300">
-            <h2 className="text-2xl lg:text-5xl font-title text-center">
-              {answer.name}
+            <ul className="flex flex-col px-5 py-5 lg:py-10 gap-1 bg-purple-200 text-md lg:text-2xl">
+              {(() => {
+                const items = [];
+                for (let i = 0; i < answer.ingredients.length; i++) {
+                  items.push(<li key={i}>- {answer.ingredients[i]}</li>);
+                }
+                return items;
+              })()}
+            </ul>
+
+            <h2 className="flex bg-purple-300 flex-col px-5 py-5 lg:py-10 text-gray-900 text-xl lg:text-3xl font-semibold">
+              Instructions:
             </h2>
-            <div className="hidden lg:flex flex-col p-5 items-end">
-              <div className=" rating justify-end pb-5">
-                <input
-                  type="radio"
-                  name="rating-1"
-                  className="mask mask-star bg-purple-900"
-                />
-                <input
-                  type="radio"
-                  name="rating-1"
-                  className="mask mask-star bg-purple-900"
-                  defaultChecked
-                />
-                <input
-                  type="radio"
-                  name="rating-1"
-                  className="mask mask-star bg-purple-900"
-                />
-                <input
-                  type="radio"
-                  name="rating-1"
-                  className="mask mask-star bg-purple-900"
-                />
-                <input
-                  type="radio"
-                  name="rating-1"
-                  className="mask mask-star bg-purple-900"
-                />
-              </div>
-              <div className="hidden lg:flex flex-row gap-2">
-                <p>{answer.portions} portions</p>
-                <p>{answer.time}</p>
-              </div>
+
+            <ul className="flex flex-col px-5 py-5 lg:py-10 gap-1 bg-purple-200 text-md lg:text-2xl">
+              {(() => {
+                const items = [];
+                for (let i = 0; i < answer.steps.length; i++) {
+                  items.push(
+                    <li key={i}>
+                      {i + 1} - {answer.steps[i]}
+                    </li>
+                  );
+                }
+                return items;
+              })()}
+            </ul>
+            <div className="flex bg-purple-500 rounded-b-lg">
+              <button
+                className="flex w-1/2 text-base bg-purple-500 justify-center lg:text-4xl p-5 hover:bg-purple-800 text-white rounded-bl-lg"
+                onClick={updateFavorites}
+              >
+                {isFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
+              </button>
+              <button
+                onClick={() => {
+                  setShowRecipe(false);
+                  setAnswer([]);
+                }}
+                className="flex w-1/2 text-base bg-purple-500 justify-center lg:text-4xl p-5 hover:bg-purple-800 text-white rounded-br-lg"
+              >
+                <CgCloseO />
+              </button>
             </div>
           </div>
-          <div className="flex text-white bg-purple-200 border-b-4 border-purple-300 border-dashed lg:hidden px-5 justify-between font-bold py-5">
-            <p className="bg-gray-600 p-2 rounded-lg">
-              {answer.portions} portions
-            </p>
-            <p className="bg-gray-600 p-2 rounded-lg">{answer.time}</p>
-          </div>
-          <div>
-            <p className="text-md lg:text-xl px-5 py-5 lg:py-10 bg-purple-200">
-              {answer.description}
-            </p>
-            <h2 className="flex bg-purple-300 flex-col px-5 py-5 lg:py-10 text-gray-900 text-xl lg:text-3xl font-semibold">
-              Ingredients:
-            </h2>
-          </div>
-
-          <ul className="flex flex-col px-5 py-5 lg:py-10 gap-1 bg-purple-200 text-md lg:text-2xl">
-            {(() => {
-              const items = [];
-              for (let i = 0; i < answer.ingredients.length; i++) {
-                items.push(<li key={i}>- {answer.ingredients[i]}</li>);
-              }
-              return items;
-            })()}
-          </ul>
-
-          <h2 className="flex bg-purple-300 flex-col px-5 py-5 lg:py-10 text-gray-900 text-3xl font-semibold">
-            Instructions:
-          </h2>
-
-          <ul className="flex flex-col px-5 py-5 lg:py-10 gap-1 bg-purple-200 rounded-b-lg text-md lg:text-2xl">
-            {(() => {
-              const items = [];
-              for (let i = 0; i < answer.steps.length; i++) {
-                items.push(
-                  <li key={i}>
-                    {i + 1} - {answer.steps[i]}
-                  </li>
-                );
-              }
-              return items;
-            })()}
-          </ul>
-          <button
-            onClick={() => {
-              setShowRecipe(false);
-              setAnswer([]);
-            }}
-            className="flex bg-purple-500 justify-center text-4xl p-5 hover:bg-purple-700 text-white rounded-b-lg"
-          >
-            <CgCloseO />
-          </button>
+        )}
+        <div
+          className={`${favoritePopup} left-1/4 w-2/4 text-center top-10 text-xl bg-white shadow-lg shadow-gray-400 p-10 text-gray-600 rounded-lg`}
+        >
+          {isFavorite ? "Added to favorites" : "Removed from favorites"}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }

@@ -4,7 +4,7 @@ export default function ModalComponent({ showModal, history, recoverHistory }) {
       <h3 className="font-title text-2xl lg:text-7xl mb-5 lg:mb-16">
         History:
       </h3>
-      <ul className="flex font-title text-gray-500 flex-col text-xl lg:text-4xl text-center gap-5 ">
+      <ul className="flex flex-wrap font-title text-gray-500 flex-col text-xl lg:text-4xl text-center gap-5 ">
         {(() => {
           const items = [];
           if (history.length > 1) {

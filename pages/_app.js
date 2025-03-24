@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   return (
-    <div>
+    <div className="bg-white">
       <Header />
       <Component {...pageProps} />
       <Footer />
