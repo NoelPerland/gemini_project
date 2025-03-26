@@ -16,7 +16,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 export default function Hampus() {
   //states
   const [promt, setPromt] = useState("");
-  const [inputTitle, setInputTitle] = useState("Food Categories or Meals");
+  const [inputTitle, setInputTitle] = useState("Category or Meal");
   const [favoritePopup, setFavoritePopup] = useState("hidden");
 
   //states []
@@ -53,42 +53,46 @@ export default function Hampus() {
 
   //Get api data
   async function sendPromt() {
-    //apply loader to generate button
-    setIsLoading(true);
+    if (inputTitle !== "Category or Meal") {
+      //apply loader to generate button
+      setIsLoading(true);
 
-    //get data
-    const result = await model.generateContent(promt);
-    const data = JSON.parse(result.response.text());
-    setAnswer(data);
+      //get data
+      const result = await model.generateContent(promt);
+      const data = JSON.parse(result.response.text());
+      setAnswer(data);
 
-    //Hide extended categories
-    setShow(false);
+      //Hide extended categories
+      setShow(false);
 
-    //Update history:
-    if (history.length > 0) {
-      const newHistory = [...history];
-      newHistory.push(data.name);
-      setHistory(newHistory);
+      //Update history:
+      if (history.length > 0) {
+        const newHistory = [...history];
+        newHistory.push(data.name);
+        setHistory(newHistory);
 
-      const newAnswerHistory = [...answerHistory];
-      newAnswerHistory.push(data);
-      setAnswerHistory(newAnswerHistory);
+        const newAnswerHistory = [...answerHistory];
+        newAnswerHistory.push(data);
+        setAnswerHistory(newAnswerHistory);
+      } else {
+        const newHistory = [];
+        newHistory.push(data.name);
+        setHistory(newHistory);
+
+        const newAnswerHistory = [];
+        newAnswerHistory.push(data);
+        setAnswerHistory(newAnswerHistory);
+      }
+
+      //remove loader from generate button
+      setIsLoading(false);
+      //Hide history modal if open
+      setShowModal(false);
+      //Show recipe
+      setShowRecipe(true);
     } else {
-      const newHistory = [];
-      newHistory.push(data.name);
-      setHistory(newHistory);
-
-      const newAnswerHistory = [];
-      newAnswerHistory.push(data);
-      setAnswerHistory(newAnswerHistory);
+      alert("Select or type category or meal first!");
     }
-
-    //remove loader from generate button
-    setIsLoading(false);
-    //Hide history modal if open
-    setShowModal(false);
-    //Show recipe
-    setShowRecipe(true);
   }
 
   //set food category through text input
@@ -219,12 +223,12 @@ export default function Hampus() {
             <input
               onChange={addCategory}
               type="text"
-              className="bg-gray-100 w-3/5 lg:w-2/5 h-20  p-5 rounded-l-lg text-gray-800 text-lg lg:text-2xl outline-none"
+              className="bg-gray-100 w-3/5 lg:w-2/5 h-16 lg:h-20  p-5 rounded-l-lg text-gray-800 text-sm lg:text-2xl outline-none"
               placeholder={inputTitle}
             ></input>
             <button
               onClick={sendPromt}
-              className="flex rounded-r-lg font-title h-20 items-center justify-center p-5  bg-gray-800 text-lg lg:text-xl text-white border-none hover:bg-gray-900"
+              className="flex rounded-r-lg font-title h-16 lg:h-20 items-center justify-center p-5  bg-gray-800  text-sm lg:text-xl text-white border-none hover:bg-gray-900"
             >
               {isLoading ? "Loading..." : "Generate"}
             </button>
