@@ -212,19 +212,19 @@ export default function Hampus() {
           <h1 className="text-xl font-bold text-center text-gray-400 pb-2">
             Recipes
           </h1>
-          <h2 className="text-center font-title text-4xl lg:text-8xl text-gray-800 font-bold mb-16 lg:mb-40 drop-shadow-lg">
+          <h2 className="text-center font-title text-4xl lg:text-6xl text-gray-800 font-bold mb-16 lg:mb-40 drop-shadow-lg">
             What are you craving for?
           </h2>
-          <div className="font-title">
+          <div className="flex justify-center font-title">
             <input
               onChange={addCategory}
               type="text"
-              className="bg-gray-100 w-3/5 lg:w-2/5 h-20 lg:h-32 p-5 rounded-l-lg text-gray-800 text-lg lg:text-2xl outline-none"
+              className="bg-gray-100 w-3/5 lg:w-2/5 h-20  p-5 rounded-l-lg text-gray-800 text-lg lg:text-2xl outline-none"
               placeholder={inputTitle}
             ></input>
             <button
               onClick={sendPromt}
-              className="btn-xs lg:btn-lg rounded-r-lg font-title h-20 lg:h-32 bg-gray-800 text-lg lg:text-xl text-white border-none hover:bg-gray-900"
+              className="flex rounded-r-lg font-title h-20 items-center justify-center p-5  bg-gray-800 text-lg lg:text-xl text-white border-none hover:bg-gray-900"
             >
               {isLoading ? "Loading..." : "Generate"}
             </button>
