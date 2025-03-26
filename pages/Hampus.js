@@ -33,6 +33,10 @@ export default function Hampus() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showFavorites, setShowFavorites] = useState(false);
 
+  useEffect(() => {
+    console.log("favorites array", favorites);
+  }, [favorites]);
+
   //Toggle show state
   function showMore() {
     if (!show) {
@@ -168,7 +172,7 @@ export default function Hampus() {
 
   useEffect(() => {
     if (favorites.length > 0) {
-      localStorage.setItem("favorites", JSON.stringify(history));
+      localStorage.setItem("favorites", JSON.stringify(favorites));
     }
   }, [favorites]);
 

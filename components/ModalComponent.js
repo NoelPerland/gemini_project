@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function ModalComponent({
   showModal,
   array,
@@ -41,6 +43,8 @@ export default function ModalComponent({
 
 export function HistoryComponent({ array, recover, fallback }) {
   const items = [];
+  console.log("history", array);
+
   if (array.length > 1) {
     for (let i = 1; i < 6; i++) {
       if (array[i]) {
@@ -68,6 +72,8 @@ export function HistoryComponent({ array, recover, fallback }) {
 
 export function FavoriteComponent({ array, fallback, recover }) {
   const items = [];
+  console.log("history", array);
+
   if (array.length > 0) {
     for (let i = 0; i < array.length; i++) {
       items.push(
@@ -86,5 +92,6 @@ export function FavoriteComponent({ array, fallback, recover }) {
   } else {
     items.push(<li key="0">{fallback}</li>);
   }
+
   return items;
 }
