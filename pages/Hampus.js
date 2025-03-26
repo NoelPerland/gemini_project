@@ -100,6 +100,7 @@ export default function Hampus() {
     setPromt(
       `Provide a valid json output without backticks at the start and end (very important). Provide the following data - name, desciptsion, time, ingredients(array), steps(array) and portions (No other external objects,arrays or keys can be provided!) Give me one meal within the category ${e.target.value}. Measurment should be in l,dl,ml, teaspoon and tablespoon.Never generate the same meal twice in a row`
     );
+    setInputTitle(e.target.value);
   }
 
   //apply selected history recipe to be recovered and displayed
