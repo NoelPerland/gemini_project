@@ -216,12 +216,12 @@ export default function Hampus() {
         </div>
       )}
 
-      <div className="flex flex-col font-sans bg-white to-gray-950 p-5 lg:p-10 lg:px-20  py-11 lg:py-40 gap-10">
+      <div className="flex flex-col font-sans bg-white to-gray-950 p-5 lg:p-10 lg:px-20  py-11 lg:py-32 gap-10">
         <div className="flex flex-col items-stretch text-center">
           <h1 className="text-xl font-bold text-center text-gray-400 pb-2">
             Recipes
           </h1>
-          <h2 className="text-center font-title text-4xl lg:text-6xl text-gray-800 font-bold mb-16 lg:mb-40 drop-shadow-lg">
+          <h2 className="text-center font-title text-4xl lg:text-7xl text-gray-800 font-bold mb-16 lg:mb-40 drop-shadow-lg">
             What are you craving for?
           </h2>
           <div className="flex justify-center font-title">
